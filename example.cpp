@@ -1,9 +1,9 @@
 #include "thread_pool.h"
 #include <iostream>
 
-struct tt {int a;};
-
 int main(){
+    std::srand(std::time(nullptr));
+
     thread_pool pool(10, 5);
 
     auto sleepy_thread = [](auto delay){
@@ -15,7 +15,7 @@ int main(){
     std::future<void> f;
 
     for(int i = 0; i < 40; i++){
-        f = pool.add_task(sleepy_thread, std::chrono::milliseconds(100));
+        f = pool.add_task(sleepy_thread, std::chrono::milliseconds(50 + rand() % 100));
     }
 
     f.get();

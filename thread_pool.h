@@ -15,7 +15,7 @@ public:
         m_max_threads { max_threads }
     {
         m_threads.reserve(max_threads);
-        for(int i = 0; i < initial_threads; ++i){
+        for(size_t i = 0; i < initial_threads; ++i){
             m_threads.emplace_back(&thread_pool::run_worker, this);
         }
     }
