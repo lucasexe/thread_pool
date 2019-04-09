@@ -68,8 +68,8 @@ private:
             auto task = m_tasks_queue.front();
             m_tasks_queue.pop();
             --m_idle_workers;
-            locker.unlock();
             wakeup_worker(); // wakeup/create other(s) worker(s) if necessary
+            locker.unlock();
             task(); // do the user task
             locker.lock();
             ++m_idle_workers;
