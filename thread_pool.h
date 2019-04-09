@@ -82,6 +82,7 @@ private:
             for(size_t i = 0; i < new_workers; i++){
                 m_threads.emplace_back(&thread_pool::run_worker, this);
             }
+            m_idle_workers += new_workers;
             if(m_idle_workers > 0){
                 m_cond_var.notify_one();
             }
